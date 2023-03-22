@@ -1,55 +1,55 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
-<body>
-<div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="<%=baseUrl%>">
+    <title>登录页</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
+  <body>
   <div>
-    <label for="username">用户名</label>
-    <input type="text" id="username">
+    <div>
+      <label for="username">用户名</label>
+      <input type="text" id="username">
+    </div>
+    <div>
+      <label for="password">密码</label>
+      <input type="password" id="password">
+    </div>
+    <div>
+      <button type="button" id="btn">登录</button>
+      <div><%=baseUrl%></div>
+    </div>
   </div>
-  <div>
-    <label for="password">密码</label>
-    <input type="password" id="password">
-  </div>
-  <div>
-    <button type="button" id="btn">登录</button>
-  </div>
-</div>
-
-<script>
-  $(function () {
-    $("#btn").click(function () {
-      let username = $("#username").val();
-      if(!username){
-        alert("用户名不能为空")
-        return;
-      }
-      let password = $("#password").val();
-      if(!password){
-        alert("密码不能为空")
-        return;
-      }
-      $.ajax({
-        url:"http://localhost:3000/login",
-        data:{
-          username,password
-        },
-        method:"post",
-        dataType:"json",
-        success(res){
-          if(res.code === 200){
-            location.href="http://localhost:3000/users/ul"
-          }else{
-            alert(res.msg)
-          }
+  </body>
+  <script>
+    $(function () {
+      $("#btn").click(function () {
+        let username = $("#username").val();
+        if(!username){
+          alert("用户名不能为空")
+          return;
         }
+        let password = $("#password").val();
+        if(!password){
+          alert("密码不能为空")
+          return;
+        }
+        $.ajax({
+          url:"login",
+          data:{
+            username,password
+          },
+          method:"post",
+          dataType:"json",
+          success(res){
+            if(res.code === 200){
+              location.href="users/ul";
+            }else{
+              alert(res.msg)
+            }
+          }
+        });
       });
-    });
-  })
-</script>
-
-</body>
+    })
+  </script>
 </html>
